@@ -20,7 +20,15 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-     
+     - run:
+          name: Updating Manifest file 
+          command: |
+            TAG=$CIRCLE_BUILD_NUM
+            ((TAG--))
+            git clone https://github.com/venkateshbabu123/10weeksofcloudapps-tfcodsUpate
+            git config --global user.email "venkateshdiyyala@gmail.com"
+            git config --global user.name "venkateshdiyyala123"
+            
 workflows:
   GitOpsflow:
     jobs:
