@@ -11,7 +11,7 @@ jobs:
           command: |
             version="build-$CIRCLE_BUILD_NUM"
             echo $version
-            docker build -t venkateshdiyyala/todo-app:$version .
+            docker build -t venki2pt/todo-app:$version .
             echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
             docker push venki2pt@gmail.com/todo-app:$version
 
