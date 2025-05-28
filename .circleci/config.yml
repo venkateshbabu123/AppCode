@@ -13,7 +13,6 @@ jobs:
             echo $version
             docker build -t venki2pt/todo-app:$version .
             echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-            docker run hello-world
             docker push venki2pt/todo-app:$version
   Update_manifest:
     docker:
@@ -21,31 +20,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run:
-          name: Updating Manifest file 
-          command: |
-            TAG=$CIRCLE_BUILD_NUM
-            ((TAG--))
-            git clone https://github.com/venkateshbabu123/10weeksofcloudapps-tfcodsUpate
-            git config --global user.email "venkateshdiyyala@gmail.com"
-            git config --global user.name "venkateshdiyyala123"
-            pwd
-            cd kube_manifest
-            pwd
-            echo $TAG
-            sed -i "s/build-.*/build-$TAG/g" manifest/deployment.yaml
-            cat manifest/deployment.yaml
-            git add .
-            git commit -m "new build with imgTag build-$TAG"
-            git config credential.helper 'cache --timeout=120'
-            git push -q https://$GITHUB_PERSONAL_TOKEN@github.com/venkateshdiyyala123/kube_manifest.git main 
-workflows:
-  GitOpsflow:
-    jobs:
-      - build_and_push
-      - Update_manifest:
-          requires:
-            - build_and_push
+      
       
 
 
