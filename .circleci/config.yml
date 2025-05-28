@@ -20,6 +20,14 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+     
+workflows:
+  GitOpsflow:
+    jobs:
+      - build_and_push
+      - Update_manifest:
+          requires:
+            - build_and_push
       
       
 
